@@ -919,6 +919,8 @@ class Mop {
 
   final Map<String, ExtensionApiHandler> _extensionApis = {};
 
+  final Map<String, SyncExtensionApiHandler> _syncExtensionApis = {};
+
   Map<String, ExtensionApiHandler> _webExtensionApis = {};
 
   factory Mop() {
