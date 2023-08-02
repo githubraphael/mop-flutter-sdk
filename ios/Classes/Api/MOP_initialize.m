@@ -8,6 +8,7 @@
 #import "MOP_initialize.h"
 #import <FinApplet/FinApplet.h>
 #import <FinAppletExt/FinAppletExt.h>
+#import <FinAppletClipBoard/FinAppletClipBoard.h>
 #import "MOPTools.h"
 
 @implementation MOP_initialize
@@ -126,8 +127,9 @@
 //    [[FATExtClient sharedClient] fat_prepareExtensionApis];
     [[FATClient sharedClient].logManager initLogWithLogDir:nil logLevel:FATLogLevelVerbose consoleLog:YES];
     
-    
     [[FATClient sharedClient] setEnableLog:YES];
+    // ClipBoard初始化
+    [FATClipBoardComponent registerComponent];
     
     success(@{});
     

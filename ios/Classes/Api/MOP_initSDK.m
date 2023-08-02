@@ -12,6 +12,8 @@
 
 - (void)setupApiWithSuccess:(void (^)(NSDictionary<NSString *,id> * _Nonnull))success failure:(void (^)(id _Nullable))failure cancel:(void (^)(void))cancel
 {
+    //google map key
+    [[FATExtClient sharedClient] registerGoogleMapService:@"AIzaSyC8gNBH-AwNLY9rxtr5-f178dBZhp0Ww3Y" placesKey:@"AIzaSyC8gNBH-AwNLY9rxtr5-f178dBZhp0Ww3Y"];
     if (!self.config) {
         failure(@"config不能为空");
         return;

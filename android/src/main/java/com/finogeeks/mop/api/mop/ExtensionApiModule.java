@@ -33,12 +33,14 @@ public class ExtensionApiModule extends BaseApi {
 
     @Override
     public String[] apis() {
-        return new String[]{"registerExtensionApi","addWebExtentionApi"};
+        return new String[]{"registerExtensionApi", "registerSyncExtensionApi", "addWebExtentionApi"};
     }
 
     @Override
     public void invoke(String s, Map param, ICallback iCallback) {
-        if(s.equals("registerExtensionApi")) {
+        boolean isFinAppProcess = FinAppClient.INSTANCE.isFinAppProcess(getContext());
+        Log.d(TAG, "ExtensionApiModule invoke register api s:" + s + " param:" + param +" isFinAppProcess:"+isFinAppProcess);
+        if (s.equals("registerExtensionApi")) {
             MethodChannel channel = MopPluginService.getInstance().getMethodChannel();
             String name = (String) param.get("name");
             Log.d(TAG, "registerExtensionApi:" + name);
@@ -50,7 +52,7 @@ public class ExtensionApiModule extends BaseApi {
 
                 @Override
                 public void invoke(String s, JSONObject jsonObject, com.finogeeks.lib.applet.interfaces.ICallback iCallback) {
-                    Log.d("MopPlugin", "invoke extensionApi:" + s + ",params:" + jsonObject);
+                    Log.d("MopPlugin", "invoke extensionApi:" + s + ",params:" + jsonObject+" isFinAppProcess:"+isFinAppProcess);
                     Map params = GsonUtil.gson.fromJson(jsonObject.toString(), HashMap.class);
                     handler.post(() -> {
                         channel.invokeMethod("extensionApi:" + name, params, new MethodChannel.Result() {
@@ -95,7 +97,64 @@ public class ExtensionApiModule extends BaseApi {
                     });
                 }
             });
-        }else if(s.equals("addWebExtentionApi")){
+        } else if (s.equals("registerSyncExtensionApi")) {
+            MethodChannel channel = MopPluginService.getInstance().getMethodChannel();
+            String name = (String) param.get("name");
+            Log.d(TAG, "registerSyncExtensionApi:" + name);
+            FinAppClient.INSTANCE.getExtensionApiManager().registerApi(new com.finogeeks.lib.applet.api.BaseApi(getContext()) {
+                @Override
+                public String[] apis() {
+                    return new String[]{name};
+                }
+
+                @Override
+                public void invoke(String s, JSONObject jsonObject, com.finogeeks.lib.applet.interfaces.ICallback iCallback) {
+                    Log.d("MopPlugin", "sync invoke extensionApi:" + s + ",params:" + jsonObject);
+                    Map params = GsonUtil.gson.fromJson(jsonObject.toString(), HashMap.class);
+                    handler.post(() -> {
+                        channel.invokeMethod("syncextensionapi:" + name, params, new MethodChannel.Result() {
+                            @Override
+                            public void success(Object result) {
+                                String json = GsonUtil.gson.toJson(result);
+                                Log.d(ExtensionApiModule.TAG, "channel invokeMethod:" + name
+                                        + " success, result=" + result + ", json=" + json);
+                                JSONObject ret = null;
+                                if (json != null && !json.equals("null")) {
+                                    try {
+                                        ret = new JSONObject(json);
+                                        if (ret.has("errMsg")) {
+                                            String errMsg = ret.getString("errMsg");
+                                            if (errMsg.startsWith(name + ":fail")) {
+                                                iCallback.onFail(ret);
+                                                return;
+                                            }
+                                        }
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                                iCallback.onSuccess(ret);
+                            }
+
+                            @Override
+                            public void error(String errorCode, String errorMessage, Object errorDetails) {
+                                FLog.e(ExtensionApiModule.TAG, "channel invokeMethod:" + name
+                                        + " error, errorCode=" + errorCode
+                                        + ", errorMessage=" + errorMessage
+                                        + ", errorDetails=" + errorDetails);
+                                iCallback.onFail();
+                            }
+
+                            @Override
+                            public void notImplemented() {
+                                iCallback.onFail();
+                            }
+                        });
+                    });
+                }
+            });
+        } else if (s.equals("addWebExtentionApi")) {
             MethodChannel channel = MopPluginService.getInstance().getMethodChannel();
             String name = (String) param.get("name");
             Log.d(TAG, "addWebExtentionApi:" + name);
