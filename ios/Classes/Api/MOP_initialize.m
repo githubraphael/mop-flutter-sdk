@@ -7,7 +7,8 @@
 
 #import "MOP_initialize.h"
 #import <FinApplet/FinApplet.h>
-#import <FinAppletExt/FinAppletExt.h>
+//#import <FinAppletExt/FinAppletExt.h>
+#import "FinAppletExt.h"
 #import <FinAppletClipBoard/FinAppletClipBoard.h>
 #import "MOPTools.h"
 

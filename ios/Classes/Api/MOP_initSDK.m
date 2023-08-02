@@ -7,6 +7,7 @@
 
 #import "Mop_initSDK.h"
 #import "MOPTools.h"
+#import "FinAppletExt.h"
 
 @implementation MOP_initSDK
 
