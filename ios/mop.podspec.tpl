@@ -16,8 +16,13 @@ A finclip miniprogram flutter sdk.
   s.public_header_files = 'Classes/**/*.h'
   s.dependency 'Flutter'
   s.ios.deployment_target = '9.0'
+  s.resources = ['Classes/FinAppletExt/Resource/FinAppletExt.bundle']
+  s.vendored_libraries = 'Classes/FinAppletExt/Vendor/fincore/libfincore.a'
+  s.vendored_libraries = 'Classes/FinAppletExt/Vendor/Lame/libmp3lame.a'
+  s.static_framework = true
 
   s.dependency 'FinApplet' , '__finapplet_version__'
-  s.dependency 'FinAppletExt' , '__finapplet_version__'
+  # s.dependency 'FinAppletExt' , '__finapplet_version__'
+  s.dependency 'FinAppletClipBoard', '__finapplet_version__'
 end
 
