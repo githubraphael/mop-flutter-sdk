@@ -38,12 +38,16 @@ class FinStoreConfig {
   /// 是否开启预加载基础库
   bool enablePreloadFramework;
 
+  /// google地图ApiKey
+  String? googleMapApiKey;
+
   FinStoreConfig(this.sdkKey, this.sdkSecret, this.apiServer,
       {this.apmServer,
       this.cryptType = "MD5",
       this.fingerprint,
       this.encryptServerData = false,
-      this.enablePreloadFramework = false});
+      this.enablePreloadFramework = false,
+      this.googleMapApiKey = ''});
 
   Map<String, dynamic> toMap() {
     return {
@@ -54,7 +58,8 @@ class FinStoreConfig {
       "cryptType": cryptType,
       "fingerprint": fingerprint,
       "encryptServerData": encryptServerData,
-      "enablePreloadFramework": enablePreloadFramework
+      "enablePreloadFramework": enablePreloadFramework,
+      "googleMapApiKey": googleMapApiKey,
     };
   }
 }

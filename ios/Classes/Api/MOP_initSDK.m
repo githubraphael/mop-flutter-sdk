@@ -13,8 +13,6 @@
 
 - (void)setupApiWithSuccess:(void (^)(NSDictionary<NSString *,id> * _Nonnull))success failure:(void (^)(id _Nullable))failure cancel:(void (^)(void))cancel
 {
-    //google map key
-    [[FATExtClient sharedClient] registerGoogleMapService:@"AIzaSyC8gNBH-AwNLY9rxtr5-f178dBZhp0Ww3Y" placesKey:@"AIzaSyC8gNBH-AwNLY9rxtr5-f178dBZhp0Ww3Y"];
     if (!self.config) {
         failure(@"config不能为空");
         return;
@@ -38,6 +36,9 @@
             storeConfig.encryptServerData = [dict[@"encryptServerData"] boolValue];
             storeConfig.enablePreloadFramework = [storeConfig.apiServer isEqualToString:@"https://api.finclip.com"];
             [storeArrayM addObject:storeConfig];
+
+            //google map key
+            [[FATExtClient sharedClient] registerGoogleMapService:dict[@"googleMapApiKey"] placesKey:dict[@"googleMapApiKey"]];
         }
         config = [FATConfig configWithStoreConfigs:storeArrayM];
     } else {
@@ -72,7 +73,6 @@
     } else {
         config.language = FATPreferredLanguageSimplifiedChinese;
     }
-    
     
     NSError* error = nil;
     FATUIConfig *uiconfig = [[FATUIConfig alloc]init];
