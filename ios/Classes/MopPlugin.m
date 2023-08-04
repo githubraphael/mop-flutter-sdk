@@ -144,8 +144,8 @@ static MopPlugin *_instance;
   }
   else if ([@"updateLanguage" isEqualToString:call.method]) {
        NSLog(@"updateLanguage");
-        NSString cCode = call.arguments[@"countryCode"];
-        NSString cLang = call.arguments[@"languageCode"];
+        NSString *cCode = call.arguments[@"countryCode"];
+        NSString *cLang = call.arguments[@"languageCode"];
         [PhizLanguageData sharedInstance].countryCode = cCode;
         [PhizLanguageData sharedInstance].languageCode = cLang;
    }
