@@ -19,16 +19,9 @@
     [[FATClient sharedClient] registerSyncExtensionApi:self.name handler:^NSDictionary *(FATAppletInfo *appletInfo, id param) {
         if([self.name isEqualToString:@"getLanguageCodeSync"]){
             NSDictionary *resultDict = [NSDictionary dictionary];
-            if([PhizLanguageData sharedInstance].languageCode == nil){
-                 NSString *languageCode = [[NSLocale preferredLanguages] firstObject];
-                 NSString *shortCode = [[NSLocale componentsFromLocaleIdentifier:languageCode] objectForKey:NSLocaleLanguageCode];
-                 NSString *countryCode = [NSString stringWithFormat:@"%@", [[NSLocale currentLocale] objectForKey:NSLocaleCountryCode]];
-                 resultDict = @{@"languageCode":shortCode,@"countryCode":countryCode};
-            }else{
-                NSString* shortCode = [PhizLanguageData sharedInstance].languageCode;
-                NSString* countryCode = [PhizLanguageData sharedInstance].countryCode;
-                resultDict = @{@"languageCode":shortCode,@"countryCode":countryCode};
-            }
+            NSString* shortCode = [PhizLanguageData sharedInstance].languageCode;
+            NSString* countryCode = [PhizLanguageData sharedInstance].countryCode;
+            resultDict = @{@"languageCode":shortCode,@"countryCode":countryCode};
             return resultDict;
         }
         return @{};

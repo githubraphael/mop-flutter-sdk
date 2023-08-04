@@ -14,8 +14,8 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedInstance = [[self alloc] init];
-        //sharedInstance.languageCode = @"en"; // Set default language code
-        //sharedInstance.countryCode = @"US";
+        sharedInstance.languageCode = @"en"; // Set default language code
+        sharedInstance.countryCode = @"US";
     });
     return sharedInstance;
 }
