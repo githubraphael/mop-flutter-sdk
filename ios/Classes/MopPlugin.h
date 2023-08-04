@@ -10,6 +10,7 @@
 @property FlutterMethodChannel *shareMethodChannel;
 @property FlutterMethodChannel *shareAppletMethodChannel;
 @property FlutterMethodChannel *appletMethodChannel;
+@property FlutterMethodChannel *phizMethodChannel;
 
 + (instancetype) instance;
 @end

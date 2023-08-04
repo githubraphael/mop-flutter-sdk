@@ -6,6 +6,7 @@
 #import <mop/MOPTools.h>
 #import "MopShareView.h"
 #import <UIView+MOPFATToast.h>
+#import "PhizLanguageData.h"
 
 @implementation MopEventStream {
     FlutterEventSink _eventSink;
@@ -64,7 +65,12 @@ static MopPlugin *_instance;
               binaryMessenger:[registrar messenger]];
     [registrar addMethodCallDelegate:_instance channel:appletShareChannel];
     _instance.shareAppletMethodChannel = appletShareChannel;
-
+    //phiz
+    FlutterMethodChannel* phizChannel = [FlutterMethodChannel
+        methodChannelWithName:@"Phiz"
+              binaryMessenger:[registrar messenger]];
+    [registrar addMethodCallDelegate:_instance channel:phizChannel];
+    _instance.phizMethodChannel = phizChannel;
 }
 
 + (instancetype)instance{
@@ -136,6 +142,13 @@ static MopPlugin *_instance;
         //   [MOPAppletDelegate instance].bindGetPhoneNumbers(jsonDic);
       }
   }
+  else if ([@"updateLanguage" isEqualToString:call.method]) {
+       NSLog(@"updateLanguage");
+        NSString cCode = call.arguments[@"countryCode"]];
+        NSString cLang = call.arguments[@"languageCode"]];
+        [PhizLanguageData sharedInstance].countryCode = cCode;
+        [PhizLanguageData sharedInstance].languageCode = cLang;
+   }
   else {
       MOPApiRequest* request = [[MOPApiRequest alloc] init];
       request.command = call.method;
