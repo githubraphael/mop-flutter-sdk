@@ -33,7 +33,8 @@ abstract class AppletHandler {
   bool customCapsuleMoreButtonClick(String appId);
 
   /// 获取自定义菜单
-  Future<List<CustomMenu>> getCustomMenus(String appId);
+  // Future<List<CustomMenu>> getCustomMenus(String appId);
+  List<CustomMenu> getCustomMenus(String appId);
 
   ///自定义菜单点击处理
   Future<void> onCustomMenuClick(

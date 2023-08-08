@@ -216,7 +216,7 @@ class MyAppletHandler extends AppletHandler {
   }
 
   @override
-  Future<List<CustomMenu>> getCustomMenus(String appId) {
+  List<CustomMenu> getCustomMenus(String appId) {
     CustomMenu menu1 = CustomMenu('WXTest', 'https://img1.baidu.com/it/u=2878938773,1765835171&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500', '百度图标', 'common');
     menu1.darkImage = 'https://img95.699pic.com/xsj/14/46/mh.jpg%21/fw/700/watermark/url/L3hzai93YXRlcl9kZXRhaWwyLnBuZw/align/southeast';
     
@@ -233,7 +233,7 @@ class MyAppletHandler extends AppletHandler {
       // CustomMenu('WXShareAPPFriends', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpvugSNLs9R7iopz_noeotAelvgzYj-74iCg&usqp=CAU', '微信好朋友', 'common'),
       // CustomMenu('WXShareAPPMoments', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7cO4KB4e5-Ugdcq4pIyWunliH7LZRZzguKQ&usqp=CAU', '微信朋友圈', 'common'),
     ];
-    return Future.value(customMenus);
+    return customMenus;
   }
 
   @override

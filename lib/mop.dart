@@ -1181,7 +1181,7 @@ class Mop {
       return handler.customCapsuleMoreButtonClick(params["appId"]);
     };
     _appletHandlerApis["getCustomMenus"] = (params) async {
-      final res = await handler.getCustomMenus(params["appId"]);
+      final res = handler.getCustomMenus(params["appId"]);
       List<Map<String, dynamic>> list = [];
       res.forEach((element) {
         Map<String, dynamic> map = Map();
