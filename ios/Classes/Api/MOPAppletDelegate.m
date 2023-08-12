@@ -57,9 +57,9 @@
 }
 
 - (BOOL)appletInfo:(FATAppletInfo *)appletInfo didClickMoreBtnAtPath:(NSString *)path {
-    NSLog(@"appletInfo:didClickMoreBtnAtPath");
     __block BOOL flag;
     FlutterMethodChannel *channel = [[MopPlugin instance] methodChannel];
+    NSLog(@"appletInfo:didClickMoreBtnAtPath,appId=%@,path=%@,channel=%@",appletInfo.appId,path,channel);
     [channel invokeMethod:@"extensionApi:customCapsuleMoreButtonClick" arguments:@{@"appId": appletInfo.appId} result:^(id _Nullable result) {
         CFRunLoopStop(CFRunLoopGetMain());
         if ([result isKindOfClass:[NSNumber class]]) {
