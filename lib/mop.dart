@@ -1235,6 +1235,14 @@ class Mop {
     _webExtensionApis[name] = handler;
     _channel.invokeMethod("addWebExtentionApi", {"name": name});
   }
+  ///显示加载中
+  Future showLoading() async {
+    return await _channel.invokeMethod("showLoading");
+  }
+  ///隐藏加载中
+  Future hideLoading() async {
+    return await _channel.invokeMethod("hideLoading");
+  }
 
   /// 原生调用webview中的js方法
   /// [appId] 小程序id
