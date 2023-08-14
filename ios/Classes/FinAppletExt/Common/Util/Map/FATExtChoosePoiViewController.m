@@ -169,15 +169,14 @@ static NSString *kUserAnnotationId = @"FATUserAnnotationViewId";
         }else {
             [localSearch startWithCompletionHandler:^(MKLocalSearchResponse *_Nullable response, NSError *_Nullable error) {
                 //NSMutableArray *placeArrayM = [NSMutableArray array];
-                if (placemark) {
-                    FATMapPlace *place = [[FATMapPlace alloc] init];
-                    place.name = placemark.name;
-                    place.address = placemark.thoroughfare;
-                    place.location = placemark.location;
-                    place.selected = YES;
-                    [self.dataArray addObject:place];
-                }
-                
+//                if (placemark) {
+//                    FATMapPlace *place = [[FATMapPlace alloc] init];
+//                    place.name = placemark.name;
+//                    place.address = placemark.thoroughfare;
+//                    place.location = placemark.location;
+//                    place.selected = YES;
+//                    [self.dataArray addObject:place];
+//                }
                 for (MKMapItem *item in response.mapItems) {
                     if (!item.isCurrentLocation) {
                         FATMapPlace *place = [[FATMapPlace alloc] init];

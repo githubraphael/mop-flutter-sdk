@@ -106,14 +106,14 @@
             [FATExtUtil getNearbyPlacesByCategory:@"All" coordinates:destCenter radius:1000 token:@""
                                                    completion:^(NSDictionary * _Nonnull dict) {
                 NSMutableArray *placeArrayM = [NSMutableArray array];
-                if (placemark) {
-                    FATMapPlace *place = [[FATMapPlace alloc] init];
-                    place.name = placemark.name;
-                    place.address = placemark.thoroughfare;
-                    place.location = placemark.location;
-                    place.selected = YES;
-                    [placeArrayM addObject:place];
-                }
+//                if (placemark) {
+//                    FATMapPlace *place = [[FATMapPlace alloc] init];
+//                    place.name = placemark.name;
+//                    place.address = placemark.thoroughfare;
+//                    place.location = placemark.location;
+//                    place.selected = YES;
+//                    [placeArrayM addObject:place];
+//                }
                 [placeArrayM addObjectsFromArray:[FATExtUtil convertPlaceDictToArray:dict]];
                 self.poiInfoListArray = [[NSMutableArray alloc] initWithArray: placeArrayM];
                 
