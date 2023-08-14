@@ -57,18 +57,19 @@
 }
 
 - (BOOL)appletInfo:(FATAppletInfo *)appletInfo didClickMoreBtnAtPath:(NSString *)path {
-    __block BOOL flag;
-    FlutterMethodChannel *channel = [[MopPlugin instance] methodChannel];
-    NSLog(@"appletInfo:didClickMoreBtnAtPath,appId=%@,path=%@,channel=%@",appletInfo.appId,path,channel);
-    [channel invokeMethod:@"extensionApi:customCapsuleMoreButtonClick" arguments:@{@"appId": appletInfo.appId} result:^(id _Nullable result) {
-        CFRunLoopStop(CFRunLoopGetMain());
-        if ([result isKindOfClass:[NSNumber class]]) {
-            flag = [result boolValue];
-        }
-    }];
-    CFRunLoopRun();
-
-    return flag;
+    return NO;
+//    __block BOOL flag;
+//    FlutterMethodChannel *channel = [[MopPlugin instance] methodChannel];
+//    NSLog(@"appletInfo:didClickMoreBtnAtPath,appId=%@,path=%@,channel=%@",appletInfo.appId,path,channel);
+//    [channel invokeMethod:@"extensionApi:customCapsuleMoreButtonClick" arguments:@{@"appId": appletInfo.appId} result:^(id _Nullable result) {
+//        CFRunLoopStop(CFRunLoopGetMain());
+//        if ([result isKindOfClass:[NSNumber class]]) {
+//            flag = [result boolValue];
+//        }
+//    }];
+//    CFRunLoopRun();
+//
+//    return flag;
 }
 
 - (NSArray<id<FATAppletMenuProtocol>> *)customMenusInApplet:(FATAppletInfo *)appletInfo atPath:(NSString *)path {
