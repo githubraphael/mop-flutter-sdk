@@ -57,6 +57,7 @@
 }
 
 - (BOOL)appletInfo:(FATAppletInfo *)appletInfo didClickMoreBtnAtPath:(NSString *)path {
+    NSLog(@"didClickMoreBtnAtPath:%@,appletInfo=%@",path,appletInfo);
     return NO;
 //    __block BOOL flag;
 //    FlutterMethodChannel *channel = [[MopPlugin instance] methodChannel];
@@ -73,7 +74,7 @@
 }
 
 - (NSArray<id<FATAppletMenuProtocol>> *)customMenusInApplet:(FATAppletInfo *)appletInfo atPath:(NSString *)path {
-    NSLog(@"customMenusInApplet");
+    NSLog(@"customMenusInApplet:%@,appletInfo=%@",path,appletInfo);
     __block NSArray *list;
     FlutterMethodChannel *channel = [[MopPlugin instance] methodChannel];
     [channel invokeMethod:@"extensionApi:getCustomMenus" arguments:@{@"appId": appletInfo.appId} result:^(id _Nullable result) {
@@ -83,7 +84,8 @@
         }
     }];
     CFRunLoopRun();
-    
+
+    NSLog(@"customMenusInApplet:%@,list=%@",path,list);
     NSMutableArray *models = [NSMutableArray array];
     for (NSDictionary<NSString *, NSString *> *data in list) {
         MopCustomMenuModel *model = [[MopCustomMenuModel alloc] init];
