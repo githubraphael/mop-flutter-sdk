@@ -75,17 +75,15 @@
 
 - (NSArray<id<FATAppletMenuProtocol>> *)customMenusInApplet:(FATAppletInfo *)appletInfo atPath:(NSString *)path {
     NSLog(@"customMenusInApplet:%@,appletInfo=%@",path,appletInfo);
-    __block NSArray *list;
-    FlutterMethodChannel *channel = [[MopPlugin instance] methodChannel];
-    [channel invokeMethod:@"extensionApi:getCustomMenus" arguments:@{@"appId": appletInfo.appId} result:^(id _Nullable result) {
-        CFRunLoopStop(CFRunLoopGetMain());
-        if ([result isKindOfClass:[NSArray class]]) {
-            list = result;
-        }
-    }];
-    CFRunLoopRun();
+    
+    NSDictionary<NSString *, NSString *> *item1 = @{@"menuId": @"shareToChatPicId", @"title": @"Share to friends", @"image": @"miniChat", @"darkImage": @"miniChat", @"type": @"common"};
+    NSDictionary<NSString *, NSString *> *item2 = @{@"menuId": @"shareToOutsidePicId", @"title": @"Share to others", @"image": @"miniSend", @"darkImage": @"miniSend", @"type": @"common"};
+    NSDictionary<NSString *, NSString *> *item3 = @{@"menuId": @"shareQrcodePicId", @"title": @"Phiz code", @"image": @"qrCode", @"darkImage": @"qrCode", @"type": @"common"};
+    NSDictionary<NSString *, NSString *> *item4 = @{@"menuId": @"555", @"title": @"小程序支付测试4", @"image": @"qrCode", @"darkImage": @"qrCode", @"type": @"common"};
 
+    NSArray<NSDictionary<NSString *, NSString *> *> *list = @[item1, item2, item3, item4];
     NSLog(@"customMenusInApplet:%@,list=%@",path,list);
+    
     NSMutableArray *models = [NSMutableArray array];
     for (NSDictionary<NSString *, NSString *> *data in list) {
         MopCustomMenuModel *model = [[MopCustomMenuModel alloc] init];
@@ -114,6 +112,7 @@
     
     return models;
 }
+
 
 - (void)clickCustomItemMenuWithInfo:(NSDictionary *)contentInfo inApplet:(FATAppletInfo *)appletInfo completion:(void (^)(FATExtensionCode code, NSDictionary *result))completion {
     NSError *parseError = nil;
