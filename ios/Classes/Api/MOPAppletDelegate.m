@@ -79,9 +79,9 @@
     NSDictionary<NSString *, NSString *> *item1 = @{@"menuId": @"shareToChatPicId", @"title": @"Share to friends", @"image": @"miniChat", @"darkImage": @"miniChat", @"type": @"common"};
     NSDictionary<NSString *, NSString *> *item2 = @{@"menuId": @"shareToOutsidePicId", @"title": @"Share to others", @"image": @"miniSend", @"darkImage": @"miniSend", @"type": @"common"};
     NSDictionary<NSString *, NSString *> *item3 = @{@"menuId": @"shareQrcodePicId", @"title": @"Phiz code", @"image": @"qrCode", @"darkImage": @"qrCode", @"type": @"common"};
-    NSDictionary<NSString *, NSString *> *item4 = @{@"menuId": @"555", @"title": @"小程序支付测试4", @"image": @"qrCode", @"darkImage": @"qrCode", @"type": @"common"};
+    //NSDictionary<NSString *, NSString *> *item4 = @{@"menuId": @"555", @"title": @"小程序支付测试4", @"image": @"qrCode", @"darkImage": @"qrCode", @"type": @"common"};
 
-    NSArray<NSDictionary<NSString *, NSString *> *> *list = @[item1, item2, item3, item4];
+    NSArray<NSDictionary<NSString *, NSString *> *> *list = @[item1, item2, item3];
     NSLog(@"customMenusInApplet:%@,list=%@",path,list);
     
     NSMutableArray *models = [NSMutableArray array];
