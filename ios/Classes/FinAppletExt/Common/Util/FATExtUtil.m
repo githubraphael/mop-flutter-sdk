@@ -199,14 +199,18 @@
         urlComponents.queryItems = queryItems;
         request.URL = urlComponents.URL;
     }
-    
-    NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    configuration.timeoutIntervalForRequest = 5.0;
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
+
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if (error) {
             NSLog(@"Error: %@", error);
             completion(nil);
             return;
         }
-        
+
         if (data) {
             NSError *jsonError;
             NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
@@ -220,8 +224,9 @@
             completion(nil);
         }
     }];
-    
+
     [task resume];
+
 }
 
 + (NSArray *)convertPlaceDictToArray:(NSDictionary*)dict{
