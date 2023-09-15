@@ -21,8 +21,9 @@ A finclip miniprogram flutter sdk.
   s.vendored_libraries = 'Classes/FinAppletExt/Vendor/Lame/libmp3lame.a'
   s.static_framework = true
 
-  s.dependency 'FinApplet' , '2.41.5'
+  s.dependency 'FinApplet' , '2.41.11'
   # s.dependency 'FinAppletExt' , '2.41.5'
-  s.dependency 'FinAppletClipBoard', '2.41.5'
+  s.dependency 'FinAppletClipBoard', '2.41.11'
+
 end
 
