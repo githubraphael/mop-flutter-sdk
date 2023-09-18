@@ -115,6 +115,7 @@
 
 
 - (void)clickCustomItemMenuWithInfo:(NSDictionary *)contentInfo inApplet:(FATAppletInfo *)appletInfo completion:(void (^)(FATExtensionCode code, NSDictionary *result))completion {
+    NSLog(@"HJH1,clickCustomItemMenuWithInfo");
     NSError *parseError = nil;
     NSMutableDictionary *shareDic = [[NSMutableDictionary alloc] initWithDictionary:[self dictionaryRepresentation:appletInfo]];
     [shareDic setValue:@{@"desc" : shareDic[@"originalInfo"][@"customData"][@"detailDescription"]} forKey:@"params"];
@@ -135,6 +136,7 @@
     if ([@"Desktop" isEqualToString:contentInfo[@"menuId"]]) {
         [self addToDesktopItemClick:appletInfo path:contentInfo[@"path"]];
     }
+    NSLog(@"HJH2,clickCustomItemMenuWithInfo");
 }
 
 - (NSDictionary *)dictionaryRepresentation:(FATAppletInfo *)object {
